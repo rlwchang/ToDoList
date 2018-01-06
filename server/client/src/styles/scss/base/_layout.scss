@@ -1,0 +1,40 @@
+.center {
+
+  &--text {
+    text-align: center;
+
+  }
+}
+
+
+$directions: top bottom left right;
+.no-margin {
+  margin: 0;
+  @each $direction in $directions {
+    &--#{$direction} {
+      margin-#{$direction}: 0;
+    }
+  }
+}
+
+.no-padding {
+  padding: 0;
+  @each $direction in $directions {
+    .no-padding--#{$direction} {
+      padding-#{$direction}: 0;
+    }
+  }
+}
+
+
+
+.row {
+  width: 100%;
+}
+
+@for $i from 1 through 16 {
+  .col-#{$i} {
+    width: (100% * $i/16);
+    float: left;
+  }
+}

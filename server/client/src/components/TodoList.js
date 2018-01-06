@@ -1,7 +1,12 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 
-import {fetchTodos} from "../actions";
+import dateformat from "dateformat";
+import FontAwesome from "react-fontawesome";
+
+import {fetchTodos, deleteTodo} from "../actions";
+
+import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
   componentDidMount() {
@@ -9,10 +14,19 @@ class TodoList extends Component {
   }
 
   renderTodos() {
-    console.log(this.props.todos);
-    const todos = this.props.todos.data
-    return this.props.todos.data ? this.props.todos.data.map(todo => <li key={todo._id}>{todo.name}</li>) : <li>Loading...</li>
-  }
+    const todos = this.props.todos;
+    console.log(todos);
+    if (todos) {
+      return todos.map(
+        todo => {
+          return (
+            <TodoItem key={todo._id} todo={todo} />
+          )}
+      )
+    } else {
+      return <div>Loading...</div>
+    }
+}
 
   render() {
     return(

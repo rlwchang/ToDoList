@@ -1,0 +1,10 @@
+.todos-list {
+
+  &__item {
+    list-style-type: none;
+
+    &__col {
+      display: inline-block;
+    }
+  }
+}

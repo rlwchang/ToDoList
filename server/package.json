@@ -9,7 +9,7 @@
   },
   "scripts": {
     "server": "nodemon index.js",
-    "client": "npm run start --prefix client",
+    "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\"  \"npm run client\"",
     "create-react-app": "create-react-app client"
   },
