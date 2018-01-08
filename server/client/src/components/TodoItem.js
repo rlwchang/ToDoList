@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import dateformat from "dateformat";
 import FontAwesome from "react-fontawesome";
 
-import {deleteTodo, updateTodo} from "../actions";
+import {deleteTodo, updateTodo, showTodo} from "../actions";
 
 class TodoItem extends Component {
   constructor(props) {
@@ -13,15 +13,15 @@ class TodoItem extends Component {
     this.state = {
       term: this.props.todo.name,
       prevTerm: this.props.todo.name,
-      editOn: false
+      editOn: false,
+      completed: this.props.todo.completed
     }
   }
 
-  onEditClick() {
-    console.log("editing...");
+  onEditClick(event) {
+    event.preventDefault();
     this.setState((prevState, props) => ({editOn: true}));
     this.todoInput.removeAttribute("disabled");
-    console.log(this.todoInput);
     this.todoInput.focus();
   }
 
@@ -34,7 +34,8 @@ class TodoItem extends Component {
     const term = event.target.value
 
     if (key == 13) {
-      this.props.updateTodo(id, todo, term);
+      const newTodo = {...todo, name: term};
+      this.props.updateTodo(id, todo, newTodo);
       this.setState(() => ({
         editOn: false,
         prevTerm: term
@@ -49,12 +50,26 @@ class TodoItem extends Component {
     }))
   }
 
+  toggleCompletion(id, todo) {
+    this.setState((prevState, props) => ({completed: !prevState.completed}))
+    const newTodo = {...todo, completed: this.state.completed};
+    this.props.updateTodo(id, todo, newTodo);
+  }
+
   render() {
     const todo = this.props.todo;
     return(
-      <li className="todos-list__item row" key={todo._id}>
-      <div className="todos-list__item__col col-12" onDoubleClick={() => this.onEditClick()}>
+      <li className="todos-list__item row clearfix" key={todo._id}>
+      <div className="todos-list__item__col col-1 flex-container">
+        <FontAwesome
+          name={this.state.completed ? "check-square-o" : "square-o"}
+          className="btn"
+          onClick={() => this.toggleCompletion()}/>
+      </div>
+      <div className="todos-list__item__col col-11 flex-container" onClick={event => this.onEditClick(event)}>
+
         <input
+          className={this.state.completed ? "todos-list__item--completed" : ""}
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
           onBlur={event => this.onEditLeave(event)}
@@ -63,14 +78,14 @@ class TodoItem extends Component {
           ref={input => this.todoInput = input}
           />
       </div>
-      <div className="todos-list__item__col col-4">
-        <FontAwesome name="pencil" className="btn" onClick={() => this.onEditClick()}/>
-        <FontAwesome name="search" className="btn" />
-        <FontAwesome name="times" className="btn" onClick={() => this.props.deleteTodo(todo._id)} />
+      <div className="todos-list__item__col col-4 flex-container flex-container--end">
+        <FontAwesome name="pencil" className="btn btn--edit" onClick={() => this.onEditClick()}/>
+        <FontAwesome name="search" className="btn btn--show" onClick={() => this.props.showTodo(todo._id)}/>
+        <FontAwesome name="times" className="btn btn--delete" onClick={() => this.props.deleteTodo(todo._id)} />
       </div>
       </li>
     )
   }
 }
 
-export default connect(null, {deleteTodo, updateTodo})(TodoItem)
+export default connect(null, {deleteTodo, updateTodo, showTodo})(TodoItem)

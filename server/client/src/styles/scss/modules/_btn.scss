@@ -7,4 +7,35 @@
   &:hover {
     opacity: 1;
   }
+
+  &--no-padding {
+    padding: 0;
+  }
+
+  &--add {
+    border: 1px solid black;
+    padding-bottom:  0.9rem;
+  }
+
+  &--edit {
+
+    &:hover {
+      color: $btnYellow
+    }
+  }
+  &--show {
+
+    &:hover {
+      color: $mainBlue
+    }
+  }
+  &--delete {
+
+    &:hover {
+      color: $btnRed
+    }
+  }
+  &--close {
+    margin-right: 1rem;
+  }
 }

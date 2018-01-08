@@ -30,7 +30,7 @@ class TodoList extends Component {
 
   render() {
     return(
-      <ul>
+      <ul className="no-padding--left">
       {this.renderTodos()}
       </ul>
     )

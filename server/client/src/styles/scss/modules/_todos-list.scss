@@ -3,8 +3,16 @@
   &__item {
     list-style-type: none;
 
+    &:nth-of-type(2n+1) {
+      background-color: darken($mainWhite, 10%);
+    }
+
+    &--completed {
+      text-decoration: line-through;
+    }
+
     &__col {
-      display: inline-block;
+      display: flex;
     }
   }
 }

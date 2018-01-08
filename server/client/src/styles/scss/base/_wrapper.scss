@@ -1,0 +1,13 @@
+.wrapper {
+  @for $i from 1 through 10 {
+    &--#{$i * 10} {
+      max-width: $i * 10%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.flex-container {
+  display: flex;
+}

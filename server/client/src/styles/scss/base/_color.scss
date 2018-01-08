@@ -1,0 +1,18 @@
+$colorList: (
+  mainGreen: $mainGreen,
+  mainWhite: $mainWhite,
+  mainBlue: $mainBlue,
+
+  btnRed: $btnRed,
+  btnYellow: $btnYellow
+);
+
+@each $color, $hexNum in $colorList {
+  .#{$color} {
+    background-color: $hexNum;
+
+    &--text {
+      color: $hexNum;
+    }
+  }
+}

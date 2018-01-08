@@ -25,9 +25,9 @@ class InputForm extends Component {
 
   render() {
     return (
-      <form onSubmit={event => this.handleSubmit(event)}>
+      <form onSubmit={event => this.handleSubmit(event)} className="input-form flex-container">
         <input type="text" value={this.state.inputTerm} onChange={event => this.inputChange(event.target.value)}/>
-        <button className="btn">+</button>
+        <button className="btn btn--add">+</button>
       </form>
     )
   }

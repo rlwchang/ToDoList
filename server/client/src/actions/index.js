@@ -9,6 +9,16 @@ export function fetchTodos() {
   }
 }
 
+export const SHOW_TODO = "SHOW_TODO";
+export function showTodo(id) {
+  const request = axios.get(`/api/todos/${id}`);
+
+  return {
+    type: SHOW_TODO,
+    payload: request
+  }
+}
+
 export const ADD_TODO = "ADD_TODO";
 export function addTodo(todo) {
   const request = axios.post("/api/todos", {name: todo});
@@ -19,8 +29,8 @@ export function addTodo(todo) {
 }
 
 export const UPDATE_TODO = "UPDATE_TODO";
-export function updateTodo(id, todo, name) {
-  const request = axios.put(`/api/todos/${id}`, {...todo, name});
+export function updateTodo(id, todo, newTodo) {
+  const request = axios.put(`/api/todos/${id}`, {...todo, ...newTodo});
 
   return {
     type: UPDATE_TODO,
@@ -35,5 +45,14 @@ export function deleteTodo(id) {
   return {
     type: DELETE_TODO,
     payload: id
+  }
+}
+
+export const CLOSE_MODAL = "CLOSE_MODAL";
+export function closeModal() {
+
+  return {
+    type: CLOSE_MODAL,
+    payload: null
   }
 }
