@@ -7,10 +7,11 @@ helper.seedDB();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static("client/dist"));
 
 const routes = require("./routes");
 
-app.get("/", (req, res) => res.sendFile(path.resolve(__dirname, "/dist/index.html")));
+app.get("/", (req, res) => res.sendFile(path.resolve(__dirname, "client/dist/index.html")));
 app.use("/api/todos", routes.todosApiRoute);
 
 const PORT = process.env.PORT || 5000;
