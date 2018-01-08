@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: true}));
 
 const routes = require("./routes");
 
-app.get("/", (req, res) => res.sendFile(path.resolve(__dirname, "../index.html")));
+app.get("/", (req, res) => res.sendFile(path.resolve(__dirname, "/dist/index.html")));
 app.use("/api/todos", routes.todosApiRoute);
 
 const PORT = process.env.PORT || 5000;
