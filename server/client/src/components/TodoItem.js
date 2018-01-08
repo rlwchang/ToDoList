@@ -51,7 +51,6 @@ class TodoItem extends Component {
   }
 
   toggleCompletion(id, todo) {
-    console.log(this.state.completed);
     this.setState((prevState, props) => {
       const newTodo = {...todo, completed: !prevState.completed};
       this.props.updateTodo(id, todo, newTodo);

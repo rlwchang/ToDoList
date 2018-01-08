@@ -1,5 +1,27 @@
 const db = require('../models/');
 
+const clearDB = () => {
+  console.log("Clearing database...")
+  return db.Todo.remove();
+}
+
+exports.seedDB = () => {
+  const currentDate = new Date();
+  const seedData = [
+    "Clean the plants",
+    "Walk the clothes",
+    "Water the dog"
+  ];
+
+  if (currentDate.getDate() % 3 === 0) {
+    console.log(currentDate.getDate());
+    clearDB().then(() => {
+      console.log("Seeding database...")
+      seedData.forEach(todo => db.Todo.create({name: todo}));
+    });
+  }
+}
+
 exports.getTodos = (req, res) => {
     db.Todo.find()
       .then(todos => res.json(todos))

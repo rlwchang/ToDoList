@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const helper = require('./helpers');
+helper.seedDB();
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
