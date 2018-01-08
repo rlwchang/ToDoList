@@ -51,9 +51,13 @@ class TodoItem extends Component {
   }
 
   toggleCompletion(id, todo) {
-    this.setState((prevState, props) => ({completed: !prevState.completed}))
-    const newTodo = {...todo, completed: this.state.completed};
-    this.props.updateTodo(id, todo, newTodo);
+    console.log(this.state.completed);
+    this.setState((prevState, props) => {
+      const newTodo = {...todo, completed: !prevState.completed};
+      this.props.updateTodo(id, todo, newTodo);
+      return {completed: !prevState.completed}
+
+    });
   }
 
   render() {
@@ -64,10 +68,9 @@ class TodoItem extends Component {
         <FontAwesome
           name={this.state.completed ? "check-square-o" : "square-o"}
           className="btn"
-          onClick={() => this.toggleCompletion()}/>
+          onClick={() => this.toggleCompletion(todo._id, todo)}/>
       </div>
       <div className="todos-list__item__col col-11 flex-container" onClick={event => this.onEditClick(event)}>
-
         <input
           className={this.state.completed ? "todos-list__item--completed" : ""}
           value={this.state.term}
