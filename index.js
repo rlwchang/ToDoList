@@ -7,7 +7,7 @@ helper.seedDB();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static("client/dist"));
+app.use(express.static(path.resolve(__dirname, "client/dist")));
 
 const routes = require("./routes");
 
